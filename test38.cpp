@@ -41,7 +41,7 @@ void heapsort(int arr[], int n)
     {
 
         swap(arr[i], arr[0]);
-        maxheap(arr, n, 0);
+        maxheap(arr, i, 0);
     }
 }
 
