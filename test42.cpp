@@ -2,7 +2,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-bool func(int arr[],int n){
+bool func(int arr[],int n,int sum){
   
 
   unordered_set<int>mp;
@@ -10,11 +10,11 @@ bool func(int arr[],int n){
   for(int i =0;i<n;i++){
 
     pre_sum +=arr[i];
-    if(mp.find(pre_sum)!=mp.end()){
+    if(mp.find(pre_sum-sum)!=mp.end()){
 
         return true;
     }
-    if(pre_sum==0){
+    if(pre_sum==sum){
         return true;
     }
     else{
@@ -28,8 +28,8 @@ return false;
 
 int main(){
 
-    int arr[]={12,2334,34123,-9000,1};
-    cout<<func(arr,5);
+    int arr[]={12,2334,34123,-9000,1,100,45};
+    cout<<func(arr,7,145);
    
 return 0 ;
 }
