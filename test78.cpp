@@ -11,7 +11,8 @@ vector<char> func(string str)
     mp.insert({'^', 4});
     mp.insert({'/', 3});
     mp.insert({'*', 2});
-    mp.insert({'-', 1});
+    mp.insert({'+', 1});
+    mp.insert({'-', 0});
 
     for (auto x : str)
     {
@@ -27,18 +28,19 @@ vector<char> func(string str)
         }
         else if (x == ')')
         {
-            while (st.top() != '('&&st.empty()==false)
+            while (st.top() != '(' && st.empty() == false)
             {
 
-                res.push_back(x);
+                res.push_back(st.top());
                 st.pop();
             }
+
             st.pop();
         }
-        else if (mp.find(x) != mp.end())
+        else if (mp.find(x)!=mp.end())
         {
 
-            if (st.empty() || st.top() == '(')
+            if (st.empty())
             {
                 st.push(x);
             }
