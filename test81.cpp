@@ -8,6 +8,7 @@ int func(string str)
     stack<int> st;
     reverse(str.begin(),str.end());
     for (int i = 0; i < str.size(); i++)
+    
     {
 
         if (str[i] >= '0' && str[i] <= '9')
