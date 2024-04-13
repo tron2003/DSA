@@ -15,9 +15,9 @@ public:
     }
 };
 
-bool func(Node *root)
+int func(Node *root)
 {
-    if (root==NULL)
+    if (root==nullptr)
     {
         return 0;
     }
@@ -49,9 +49,9 @@ int main()
     // root->left->left = new Node(1);
     // root->left->right = new Node(1);
     // root->right->left = new Node(1);
-    root->right->right = new Node(1);
-    root->right->right->right=new Node(12);
-    root->right->right->right->right=new Node(12);
+    root->right->left = new Node(22);
+    root->left->right=new Node(12);
+    // root->right->right->right->right=new Node(12);
 
     cout << func(root);
 
