@@ -2,7 +2,7 @@
 #include <algorithm>
 using namespace std;
 #define tree TreeNode
-class TreeNode
+class TreeNode                                    
 {
 public:
     int val;
