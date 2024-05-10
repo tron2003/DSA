@@ -37,6 +37,8 @@ int spanningTree(int V, int E, int edges[][3])
         vis[v] = true;
         res += wt;
         for(auto x:adj[v]){
+
+     
             if(vis[x[0]]==false){
                 pq.push({x[1], x[0]});
             }
