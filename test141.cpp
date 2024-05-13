@@ -16,7 +16,7 @@ int func(vector<vector<int>> arr, int v)
             if (!vis[j] && (curr == -1 || key[curr] > key[j]))
             {
                 curr = j;
-  vis[curr] = true;
+                vis[curr] = true;
             }
         }
 
