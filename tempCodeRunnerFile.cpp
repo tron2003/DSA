@@ -1,0 +1,1 @@
+st[u] != INT_MAX
