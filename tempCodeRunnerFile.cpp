@@ -1,1 +1,2 @@
-st[u] != INT_MAX
+    if (!root)
+        return;
