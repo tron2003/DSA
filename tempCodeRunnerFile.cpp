@@ -1,1 +1,2 @@
-&&i<=j+arr[j]
+.push_back(temp);
+     ret
