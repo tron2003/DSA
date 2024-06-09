@@ -4,13 +4,12 @@ using namespace std;
 
 #define mod 1000000007
 
-int helper(vector<int> w, vector<int> p, int n, int cap)
+int helper(vector<int> w, vector<int> p, vector<vector<int>> &dp, int n, int cap)
 {
 
     if (n == 0)
     {
-
-        if (w[0] <= cap)
+        if (w[n] <= cap)
         {
             return p[0];
         }
@@ -20,15 +19,21 @@ int helper(vector<int> w, vector<int> p, int n, int cap)
         }
     }
     int inc = 0;
+    if (dp[n][cap] != -1)
+    {
+        return dp[n][cap];
+    }
+    int exe = 0;
     if (w[n] <= cap)
     {
-        inc = p[n] + helper(w, p, n - 1, cap - w[n]);
+
+        inc = p[n] + helper(w, p, dp, n - 1, cap - w[n]);
     }
-    int exe = 0 + helper(w, p, n - 1, cap);
+    exe = helper(w,p,dp,n-1,cap);
 
-    int res = max(exe, inc);
+    dp[n][cap] = max(inc, exe);
 
-    return res;
+    return dp[n][cap];
 }
 
 void func()
@@ -38,8 +43,8 @@ void func()
     int cap = 5;
     int n = w.size();
     // int i = n - 1;
-    // vector<long long> dp(n + 1, 0);
-    int res = helper(w, p, n - 1, cap);
+    vector<vector<int>> dp(n + 1, vector<int>(cap + 1, -1));
+    int res = helper(w, p, dp, n - 1, cap);
     cout << res;
 }
 
