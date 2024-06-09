@@ -17,7 +17,7 @@ int helper(int n,vector<int>&dp)
     for (int i = 1; i * i <= n; i++)
     {
         int temp = i * i;
-        ans += min(ans, 1 + helper(n - temp,dp));
+        ans = min(ans, 1 + helper(n - temp,dp));
     }
     dp[n] = ans;
     return dp[n];
