@@ -5,92 +5,80 @@
 
 using namespace std;
 
-int helper(int s, int n)
-
+int helper(vector<int> arr, int l, int r, map<pair<int, int>, int> &mp)
 {
-    if (s >= n)
+
+    if (l == r)
     {
         return 0;
     }
     int ans = INT_MAX;
-
-    for (int i = s; i <= n; i++)
+    for (int i = l; i < r; i++)
     {
-        ans += min(ans, i + max(helper(s, i - 1), helper(i + 1, n)));
+        ans = min(ans, (mp[{l, i}] * mp[{i + 1, r}]) + helper(arr, l, i, mp) + helper(arr, i + 1, r, mp));
     }
     return ans;
 }
 
-int helper_memo(int s, int n, vector<vector<int>> &dp)
+int helper_memo(vector<int> arr, int l, int r, map<pair<int, int>, int> &mp, vector<vector<int>> &dp)
 
 {
 
-    if (s >= n)
+    if (l == r)
     {
         return 0;
     }
-    if (dp[s][n] != -1)
+    if (dp[l][r] != -1)
     {
-        return dp[s][n];
+        return dp[l][r];
     }
     int ans = INT_MAX;
-
-    for (int i = s; i <= n; i++)
+    for (int i = l; i < r; i++)
     {
-        ans += min(ans, i + max(helper_memo(s, i - 1, dp), helper_memo(i + 1, n, dp)));
+        ans = min(ans, (mp[{l, i}] * mp[{i + 1, r}]) + helper_memo(arr, l, i, mp, dp) + helper_memo(arr, i + 1, r, mp, dp));
     }
-    dp[s][n] = ans;
+    dp[l][r] = ans;
     return ans;
 }
 
-int helper_tab(int n)
+int helper_tab(int n, vector<int> arr,map<pair<int,int>,int>&mp)
 {
     vector<vector<int>> dp(n + 2, vector<int>(n + 2, 0));
-    for (int s = n; s >= 1; s--)
+    for (int l = n -1; l >= 0; l--)
     {
-        for (int e = s + 1; e <= n; e++)
+
+        for (int r = l + 1; r < n; r++)
         {
-            if (s == e)
+            int ans = INT_MAX;
+            for (int k = l; k < r; k++)
             {
-                continue;
+                ans = min(ans, (mp[{l, k}] * mp[{k + 1, r}]) + dp[l][k] +dp[k+1][r]  );
             }
-            else
-            {
-                int ans = INT_MAX;
-                // int ans = 0;
-                for (int k = s; k <= e; k++)
-                {
-                    ans += min(ans, k + max(dp[s][k - 1], dp[k + 1][e]));
-                }
-                dp[s][e] = ans;
-            }
+            dp[l][r] = ans;
         }
     }
-    return dp[1][n];
-}
-
-int fact(int n)
-{
-
-    if (n <= 1)
-    {
-        return 1;
-    }
-    return n * fact(n - 1);
-}
-int helper_sc(int n)
-{
+    return dp[0][n-1];
 }
 
 void func()
 {
-    int n = 7;
-    vector<vector<int>> dp(n + 1, vector<int>(n + 1, -1));
-    // vector<int> dp(n + 1, -1);
-    // int ans = helper(1, n);
-    // int ans = helper_memo(1, n,dp);
-    int ans = helper_tab(n);
-    cout << ans;
+    vector<int> arr = {6, 2, 4};
+    int n = arr.size();
+    map<pair<int, int>, int> mp;
+    for (int i = 0; i < n; i++)
+    {
+        mp[{i, i}] = arr[i];
+        for (int j = i + 1; j < n; j++)
+        {
+
+            mp[{i, j}] = max(arr[j], mp[{i, j - 1}]);
+        }
+    }
+    // int res = helper(arr, 0, n-1,mp);
+    // vector<vector<int>> dp(n + 1, vector<int>(n + 1, -1));
+    // int res = helper_memo(arr, 0, n-1,mp,dp);
+    int res = helper_tab(n, arr,mp);
+    cout << res << "";
 }
 
 int main()
