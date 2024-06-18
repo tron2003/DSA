@@ -55,16 +55,16 @@ int helper_memo(string s1, int i, string s2, int j, vector<vector<int>> &dp)
     int res = 0;
     if (s1[i] == s2[j])
     {
-        res = 0 + helper(s1, i + 1, s2, j + 1);
+        res = 0 + helper_memo(s1, i + 1, s2, j + 1,dp);
     }
     else
     {
         // insert case
-        int insert = 1 + helper(s1, i, s2, j + 1);
+        int insert = 1 + helper_memo(s1, i, s2, j + 1,dp);
         // delete
-        int del = 1 + helper(s1, i + 1, s2, j);
+        int del = 1 + helper_memo(s1, i + 1, s2, j,dp);
         // replce
-        int rep = 1 + helper(s1, i + 1, s2, j + 1);
+        int rep = 1 + helper_memo(s1, i + 1, s2, j + 1,dp);
         res = min({insert, del, rep});
     }
     dp[i][j] = res;
@@ -162,9 +162,9 @@ void func()
   }
     // int res = helper(s1, 0, s2, 0);
     vector<vector<int>> dp(s1.size() + 1, vector<int>(s2.size() + 1, -1));
-    // int res = helper_memo(s1, 0, s2, 0, dp);
+    int res = helper_memo(s1, 0, s2, 0, dp);
     // int res = helper_tab(s1, s2);
-    int res = helper_sc(s1, s2);
+    // int res = helper_sc(s1, s2);
 
     cout << res;
 }

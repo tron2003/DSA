@@ -1,4 +1,3 @@
- if (d == 0 && x == 0)
-    {
-        return 1;
-    }
+  if(next[i]==-1){
+            next[i] = arr.size();
+        }
