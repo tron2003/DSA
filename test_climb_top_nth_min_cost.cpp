@@ -8,7 +8,7 @@ int helper(vector<int> &dp, vector<int> &arr, int n)
     dp[1] = arr[1];
     for (int i = 2; i < n;i++){
 
-        dp[i] = arr[i] + min(helper(dp, arr, n - 1), helper(dp, arr, n - 2));
+        dp[i] = arr[i] + min(dp[n-1], dp[n-2]);
     }
     return min(dp[n-1],dp[n-2]);
 }
