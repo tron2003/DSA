@@ -33,7 +33,7 @@ int helper(vector<int> arr, int t, int n, vector<int> &dp)
 
 void func()
 {
-    vector<int> arr = {1, 2, 5};
+    vector<int> arr = {1,2};
     int t = 5;
     int n = 3;
     vector<int> dp(t + 1, -1);
