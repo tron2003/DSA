@@ -1,1 +1,4 @@
-cout << this << endl;
+public:
+// //    void speak(){
+// //        cout << "barking" << endl;
+// //    }
