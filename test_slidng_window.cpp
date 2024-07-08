@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#include<iostream>
 using namespace std;
 
 int helper(vector<int> arr, int n, int l, int r, int k)
@@ -9,10 +10,10 @@ int helper(vector<int> arr, int n, int l, int r, int k)
     {
 
         sum += arr[r];
-        while (sum > k)
+       if(sum > k &&l<=r)
         {
             sum -= arr[l];
-            l = l + 1;
+            l++;
         }
         if (sum <= k)
         {
@@ -28,9 +29,10 @@ void man()
 {
     vector<int> arr = {1, 4, 4, 423};
     int n = arr.size();
-    int k = 2;
+    int k = 0;
     int res = helper(arr, n, 0, 0, k);
     cout << res;
+
 }
 
 int main()
