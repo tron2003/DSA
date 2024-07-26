@@ -9,7 +9,7 @@ int helper(vector<int> w, vector<int> p, vector<vector<int>> &dp, int n, int cap
 
     if (n == 0)
     {
-        if (w[n] <= cap)
+        if (w[0] <= cap)
         {
             return p[0];
         }

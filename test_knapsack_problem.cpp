@@ -33,7 +33,7 @@ int helper(vector<int> w, vector<int> p, int n, int cap)
 
 void func()
 {
-    vector<int> w = {1, 2, 3, 4, 5};
+    vector<int> w = {1, 2, 3, 4};
     vector<int> p = {5, 4, 8, 6};
     int cap = 5;
     int n = w.size();
