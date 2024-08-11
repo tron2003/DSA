@@ -1,35 +1,32 @@
 class Solution
 {
 public:
-    int divide(int divid, int div)
+    int divide(int dividend, int divisor)
     {
-        if (divid == div)
-        {
-            return 1;
-        }
-        if (divid == INT_MIN && div == -1)
-            return INT_MAX;
-        if (divid == INT_MIN && div == 1)
-            return INT_MIN;
 
-        long long n = abs(divid);
-        long long d = abs(div);
-        int res = 0;
+        if (dividend == divisor)
+            return 1;
+
+        unsigned int ans = 0;
+        int sign = 1;
+
+        if ((dividend < 0 && divisor > 0) || (dividend > 0 && divisor < 0))
+            sign = -1;
+
+        unsigned int n = abs(dividend), d = abs(divisor);
+
         while (n >= d)
         {
-
-            long int mul = d, tmp = 1;
-            while (mul <= n - mul)
-            {
-                mul += mul;
-                tmp += tmp;
-            }
-            res += tmp;
-            n -= mul;
+            int count = 0;
+            while (n > (d << (count + 1)))
+                count++;
+            n -= d << count;
+            ans += 1 << count;
         }
-        if ((divid < 0 && div > 0) || (divid > 0 && div < 0))
-            return -res;
 
-        return res;
+        if (ans == (1 << 31) && sign == 1)
+            return INT_MAX;
+
+        return sign * ans;
     }
 };
