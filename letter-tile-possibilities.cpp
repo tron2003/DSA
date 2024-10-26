@@ -1,53 +1,37 @@
 class Solution
 {
 public:
-    void helper(int i, string s, unordered_set<string> &mp, string temp)
+    void rec(int level, int &cnt, unordered_map<char, int> &mpp, int n)
     {
-        if (i >= s.size())
+        // base case
+        cnt++;
+        if (level == n)
         {
-
-            if (mp.find(temp) == mp.end())
-            {
-
-                mp.insert(temp);
-                return;
+            return;
+        }
+        // recursive case
+        for (auto v : mpp)
+        { // choice
+            // take
+            if (v.second != 0)
+            { // check
+                mpp[v.first]--;
+                rec(level + 1, cnt, mpp, n);
+                mpp[v.first]++;
             }
-            return;
         }
-        helper(i + 1, s, mp, temp + s[i]);
-        helper(i + 1, s, mp, temp);
-
-        return;
     }
-    void helper2(int i, string s, set<string> &st, string temp)
+    int numTilePossibilities(string tiles)
     {
+        int cnt = 0;
+        unordered_map<char, int> mpp;
+        int n = tiles.size();
 
-        if (i >= s.size())
-        {
-            st.insert(s);
-            return;
-        }
+        for (int i = 0; i < n; i++)
+            mpp[tiles[i]]++;
 
-        for (int j = i; j < s.size(); j++)
-        {
-            swap(s[i], s[j]);
-            helper2(i + 1, s, st, temp);
-            swap(s[j], s[i]);
-        }
-        return;
-    }
-    int numTilePossibilities(string s)
-    {
+        rec(0, cnt, mpp, n);
 
-        unordered_set<string> mp;
-        helper(0, s, mp, "");
-        int res = 0;
-        set<string> st;
-        for (auto x : mp)
-        {
-
-            helper2(0, x, st, "");
-        }
-        return st.size() - 1;
+        return cnt - 1;
     }
 };
